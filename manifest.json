@@ -1,0 +1,27 @@
+{
+    "name": "Tab Tracker",
+    "description": "Extension to track the websites I waste time on.",
+    "version": "1.0.0",
+    "manifest_version": 3,
+    "author": "",
+    "background": {
+        "service_worker": "background.js"
+    },
+    "permissions": ["storage"],
+    "action": {
+        "default_popup": "popup.html",
+        "default_title": "Tab Tracking",
+        "default_icon": {
+            "16": "/images/favicon-16x16.png",
+            "32": "/images/favicon-32x32.png",
+            "48": "/images/favicon.ico",
+            "128": "/images/favicon-128.png"
+        }
+    },
+    "icons": {
+        "16": "/images/favicon-16x16.png",
+        "32": "/images/favicon-32x32.png",
+        "48": "/images/favicon-48x48.png",
+        "128": "/images/favicon-128.png"
+    }
+}
