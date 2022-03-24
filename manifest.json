@@ -5,29 +5,29 @@
     "manifest_version": 3,
     "author": "obtusedev",
     "background": {
-        "service_worker": "background.js"
+        "service_worker": "src/js/background.js"
     },
     "content_scripts": [
         {
             "matches": ["<all_urls>"],
-            "js": ["main.js"]
+            "js": ["src/js/main.js"]
         }
     ],
     "permissions": ["tabs", "bookmarks"],
     "action": {
-        "default_popup": "popup.html",
+        "default_popup": "src/popup.html",
         "default_title": "Tab Tracker",
         "default_icon": {
-            "16": "/images/favicon-16x16.png",
-            "32": "/images/favicon-32x32.png",
-            "48": "/images/favicon.ico",
-            "128": "/images/favicon-128.png"
+            "16": "src/img/favicon-16x16.png",
+            "32": "src/img/favicon-32x32.png",
+            "48": "src/img/favicon.ico",
+            "128": "src/img/favicon-128.png"
         }
     },
     "icons": {
-        "16": "/images/favicon-16x16.png",
-        "32": "/images/favicon-32x32.png",
-        "48": "/images/favicon-48x48.png",
-        "128": "/images/favicon-128.png"
+        "16": "src/img/favicon-16x16.png",
+        "32": "src/img/favicon-32x32.png",
+        "48": "src/img/favicon-48x48.png",
+        "128": "src/img/favicon-128.png"
     }
 }
