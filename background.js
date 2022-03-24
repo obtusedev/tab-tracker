@@ -5,3 +5,10 @@ async function getTotalTabsOpened() {
     let num = await chrome.tabs.query({ windowId: chrome.windows.WINDOW_ID_NONE});
     return num.length;
 }
+
+// Returns a list of tab objects
+async function getAllTabs() {
+    let allTabs = await chrome.tabs.query({ windowId: chrome.windows.WINDOW_ID_NONE});
+    return allTabs;
+}
+
