@@ -1,3 +1,8 @@
+/*===== Server =====*/
+async function serverStatus() {
+    let response = await fetch("https://httpbin.org/get");
+    return response.ok ? "Up" : "Down"
+}
 /*===== Tab(s) =====*/
 
 // Returns total list of tabs from all windows
