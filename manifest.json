@@ -13,7 +13,7 @@
             "js": ["main.js"]
         }
     ],
-    "permissions": ["tabs"],
+    "permissions": ["tabs", "bookmarks"],
     "action": {
         "default_popup": "popup.html",
         "default_title": "Tab Tracker",
