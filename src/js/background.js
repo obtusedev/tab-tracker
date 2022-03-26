@@ -70,6 +70,71 @@ async function getAllWindowId() {
     })
 }
 
+
+/*===== Storage =====*/
+
+class Storage {
+    getAllItems() {
+        // get all items in storage
+        return new Promise((resolve, reject) => {
+            chrome.storage.sync.get(null, (items) => {
+                if (chrome.runtime.lastError) {
+                    return reject(chrome.runtime.lastError);
+                }
+                resolve(items);
+            })
+        })
+    }
+    clearAllItems() {
+        // clear all storage items
+        return new Promise((resolve, reject) => {
+            chrome.storage.sync.clear(() => {
+                if (chrome.runtime.lastError) {
+                    return reject(chrome.runtime.lastError);
+                }
+                resolve("ok");
+            })
+        })
+    }
+    getValue(key) {
+        return new Promise((resolve, reject) => {
+            chrome.storage.sync.get(key, (result) => {
+                if (chrome.runtime.lastError) {
+                    return reject(chrome.runtime.lastError);
+                }
+                return resolve(result);
+            })
+        })
+        
+    }
+    setItem(obj) {
+        // sets new object in storage
+        return new Promise((resolve, reject) => {
+            chrome.storage.sync.set(obj, () => {
+                if (chrome.runtime.lastError) {
+                    reject(chrome.runtime.lastError);
+                }
+                resolve(obj);
+            })
+        })
+    }
+    removeItem(key) {
+        return new Promise((resolve, reject) => {
+            chrome.storage.sync.remove()
+        })
+    }
+    spaceInUse() {
+        // return space used in bytes
+        return new Promise((resolve, reject) => {
+            chrome.storage.sync.getBytesInUse(null, (size) => {
+                if (chrome.runtime.lastError) {
+                    return reject(chrome.runtime.lastError);
+                }
+                resolve(size);
+            })
+        })
+    }
+}
 async function start() {
     console.clear();
     let tabs = await getAllTabs();
