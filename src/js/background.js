@@ -26,7 +26,7 @@ class Bookmark {
     // listens to bookmark being created and logs it
     listenForBookmarkCreatedEvent() {
     chrome.bookmarks.onCreated.addListener((id, bookmark) => {
-            (new Storage).set({[id]: {...bookmark, bookmark: true}, });
+            (new Storage).set({bookmarks: {[id]: bookmark }});
     })
 }
     // remove bookmark from storage
