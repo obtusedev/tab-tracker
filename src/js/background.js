@@ -16,10 +16,7 @@ async function tabInfo() {
     };
 }
 
-/*===== Server =====*/
-async function serverStatus() {
-    let response = await fetch("https://httpbin.org/get");
-    return response.ok ? "Up" : "Down"
+/*===== Setting(s) =====*/
 }
 
 
