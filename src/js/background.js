@@ -74,7 +74,7 @@ async function getAllWindowId() {
 /*===== Storage =====*/
 
 class Storage {
-    getAllItems() {
+    getAll() {
         // get all items in storage
         return new Promise((resolve, reject) => {
             chrome.storage.sync.get(null, (items) => {
@@ -85,7 +85,7 @@ class Storage {
             })
         })
     }
-    clearAllItems() {
+    clear() {
         // clear all storage items
         return new Promise((resolve, reject) => {
             chrome.storage.sync.clear(() => {
@@ -96,7 +96,8 @@ class Storage {
             })
         })
     }
-    getValue(key) {
+    get(key) {
+        // get single key value object
         return new Promise((resolve, reject) => {
             chrome.storage.sync.get(key, (result) => {
                 if (chrome.runtime.lastError) {
@@ -107,7 +108,7 @@ class Storage {
         })
         
     }
-    setItem(obj) {
+    set(obj) {
         // sets new object in storage
         return new Promise((resolve, reject) => {
             chrome.storage.sync.set(obj, () => {
@@ -118,12 +119,18 @@ class Storage {
             })
         })
     }
-    removeItem(key) {
+    remove(key) {
+        // remove key value from storage
         return new Promise((resolve, reject) => {
-            chrome.storage.sync.remove()
+            chrome.storage.sync.remove(key, () => {
+                if (chrome.runtime.lastError) {
+                    return reject(chrome.runtime.lastError);
+                }
+                resolve("ok")
+            })
         })
     }
-    spaceInUse() {
+    getBytesInUse() {
         // return space used in bytes
         return new Promise((resolve, reject) => {
             chrome.storage.sync.getBytesInUse(null, (size) => {
