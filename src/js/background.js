@@ -24,13 +24,24 @@ async function serverStatus() {
 
 
 /*===== Bookmark(s) =====*/
-function newBookmarkCreatedEvent() {
+
+class Bookmark {
+    // listens to bookmark being created and logs it
+    listenForBookmarkCreatedEvent() {
     chrome.bookmarks.onCreated.addListener((id, bookmark) => {
-        // TODO: post this to backend api
-        console.log(id)
-        console.log(bookmark)
-        // bookmark obj = dateAdded, id, index, parentId, title, url
+            (new Storage).set({[id]: {...bookmark, bookmark: true}, });
     })
+}
+    // remove bookmark from storage
+    listenForBookmarkRemovedEvent() {
+        chrome.bookmarks.onRemoved.addListener((id, removedInfo) => {
+            (new Storage).remove(id);
+        })
+    }
+    listenForBookmarkEventUpdates() {
+        this.listenForBookmarkCreatedEvent();
+        this.listenForBookmarkRemovedEvent();
+    }
 }
 
 
