@@ -1,19 +1,4 @@
-// Returns object containing information on tab numbers in active window tabs & total.
-async function tabInfo() {
-    let activeWindowQueryOptions = {
-        active: true,
-        currentWindow: true,
-    };
-    let allWindowQueryOptions = {
-        active: false,
-        currentWindow: false,
-    };
-    let activeWindow = await chrome.tabs.query(activeWindowQueryOptions);
-    let allWindow = await chrome.tabs.query(allWindowQueryOptions);
-    return {
-        active: activeWindow,
-        total: allWindow
-    };
+/*===== Setting(s) =====*/
 }
 
 /*===== Setting(s) =====*/
