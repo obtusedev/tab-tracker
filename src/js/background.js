@@ -1,7 +1,20 @@
 /*===== Setting(s) =====*/
+
+class Setting {
+    constructor() {
+
+    }
+
 }
 
-/*===== Setting(s) =====*/
+/*===== Badge(s) =====*/
+
+function createBadgeText(content) {
+    chrome.action.setBadgeText({text: content});
+}
+
+function getBadgeText() {
+    chrome.action.getBadgeText()
 }
 
 
@@ -10,10 +23,11 @@
 class Bookmark {
     // listens to bookmark being created and logs it
     listenForBookmarkCreatedEvent() {
-    chrome.bookmarks.onCreated.addListener((id, bookmark) => {
+        chrome.bookmarks.onCreated.addListener((id, bookmark) => {
             (new Storage).set({bookmarks: {[id]: bookmark }});
-    })
-}
+            createBadgeText("1");
+        })
+    }
     // remove bookmark from storage
     listenForBookmarkRemovedEvent() {
         chrome.bookmarks.onRemoved.addListener((id, removedInfo) => {
@@ -108,7 +122,7 @@ class Storage {
                 if (chrome.runtime.lastError) {
                     reject(chrome.runtime.lastError);
                 }
-                resolve(obj);
+                resolve("ok");
             })
         })
     }
@@ -135,25 +149,15 @@ class Storage {
         })
     }
 }
+
+
 async function start() {
-    console.clear();
-    let tabs = await getAllTabs();
-    /*
-    tabs.forEach((obj) => {
-        console.log(obj.url)
-    })
-    */
-   //newTabCreatedEvent()
-   chrome.tabs.onCreated.addListener((tab) => {
-       console.log(tab)
-       console.log("fuck")
-   })
-   chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
-       //console.log(changeInfo)
-       //console.log("fuck")
-   })
-   let d = await serverStatus();
-   console.log(d)
+   (new Bookmark).listenForBookmarkEventUpdates();
+   let storage = new Storage();
+   let store = await storage.getAll();
+   console.log(store)
+   console.log("running in background.js")
 }
+
 
 start();
